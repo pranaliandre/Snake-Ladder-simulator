@@ -10,13 +10,16 @@ WIN_POSITION=100
 
 #variable
 positionPlayer=0
-
+rollDice=0
+#initializing the dictionary
+declare -A storeRecords
 #function of  player then checks for a option NO_PLAY, SNAKE and LADDER
 function setPlayer(){
 	#Player roll die and to get a number 1 to 6
 	rollDie=$(( RANDOM % 6 + 1 ))
 	
 	playingOptions=$(( RANDOM % 3 ))
+	(( rollDice++ ))
 	#Move player position according to playing options
 	case $playingOptions in
 		$NO_PLAY)
@@ -30,7 +33,7 @@ function setPlayer(){
 			;;
 	esac
 	resetWrongPosition
-	echo "Player Position : "$positionPlayer
+	storeRecords[RollDice:$rollDice]=$positionPlayer
 	if [ $positionPlayer -eq $WIN_POSITION ]
 	then
 			echo "player win"
