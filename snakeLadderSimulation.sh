@@ -11,6 +11,7 @@ WIN_POSITION=100
 #variable
 positionPlayer=0
 rollDice=0
+player=2
 #initializing the dictionary
 declare -A storeRecords
 #function of  player then checks for a option NO_PLAY, SNAKE and LADDER
@@ -34,18 +35,16 @@ function setPlayer(){
 	esac
 	resetWrongPosition
 	storeRecords[RollDice:$rollDice]=$positionPlayer
-	if [ $positionPlayer -eq $WIN_POSITION ]
-	then
-			echo "player win"
-	fi
 }
 #function of play er play untill win
 function playUntilWin()
 {
 	while [ $positionPlayer -ne $WIN_POSITION ] 
 	do
+		switchPlayer
 		setPlayer	
 	done
+	echo "player: $player won"
 }
 #function of reset wrong position
 function resetWrongPosition(){
@@ -55,6 +54,15 @@ function resetWrongPosition(){
 	elif [ $positionPlayer -gt $WIN_POSITION ]
 	then
 		positionPlayer=$((positionPlayer - rollDie))
+	fi
+}
+#switch the player one by one
+function switchPlayer(){
+	if [ $player -eq 1 ]
+	then
+		player=2
+	else
+		player=1
 	fi
 }
 #start game
