@@ -16,13 +16,13 @@ function setPlayer(){
 	#Move player position according to playing options
 	case $playingOptions in
 		$NO_PLAY)
-			playingOptions=$playingOptions
+			positionPlayer=$positionPlayer
 			;;
 		$LADDER)
-			playingOptions=$(( $playingOptions + $rollDie))
+			positionPlayer=$(( $positionPlayer + $rollDie))
 			;;
 		$SNAKE)
-			playingOptions=$(( $playingOptions - $rollDie ))
+			positionPlayer=$(( $positionPlayer - $rollDie ))
 			;;
 	esac
 }
