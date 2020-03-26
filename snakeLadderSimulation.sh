@@ -31,13 +31,17 @@ function setPlayer(){
 	esac
 	resetWrongPosition
 	echo "Player Position : "$positionPlayer
+	if [ $positionPlayer -eq $WIN_POSITION ]
+	then
+			echo "player win"
+	fi
 }
 #function of play er play untill win
 function playUntilWin()
 {
-	while [ $positionPlayer -le $WIN_POSITION ] 
+	while [ $positionPlayer -ne $WIN_POSITION ] 
 	do
-		setPlayer
+		setPlayer	
 	done
 }
 #function of reset wrong position
@@ -45,6 +49,9 @@ function resetWrongPosition(){
 	if [ $positionPlayer -lt $START_POSITION ]
 	then
 		positionPlayer=$START_POSITION
+	elif [ $positionPlayer -gt $WIN_POSITION ]
+	then
+		positionPlayer=$((positionPlayer - rollDie))
 	fi
 }
 #start game
